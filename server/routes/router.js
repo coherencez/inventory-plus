@@ -1,5 +1,3 @@
-const Router = require('express-promise-router');
-
-const router = new Router();
+const router = require('express-promise-router')();
 
 module.exports = router;
