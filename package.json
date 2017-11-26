@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "nodemon --experimental-modules --inspect server/index.mjs"
+    "dev": "nodemon --inspect server/index.js",
+    "lint": "eslint ."
   },
   "dependencies": {
     "dotenv": "^4.0.0",
