@@ -14,9 +14,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // create db connection and attach to req object
-app.use(db.connect);
+// app.use(db.connect);
 
 // mount async routes into main express app
 mountRoutes(app);
 
-app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+const startServer = (async () => {
+  try {
+    const dbSetup = await db.initializeRDB();
+    if (dbSetup) {
+      app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+    }
+  } catch (e) {
+    console.log(
+      `Error connecting to database or initializing server. Refer to logs for more information`
+    );
+    console.log(e.message);
+    process.exit(1);
+  }
+})();
