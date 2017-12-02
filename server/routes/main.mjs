@@ -1,5 +1,5 @@
-const router = require('./router');
-const { dataDelay, handleError } = require('../../utils');
+import router from './router';
+import { dataDelay, handleError } from '../../utils';
 
 router.get('/', async (req, res) => {
   try {
@@ -10,4 +10,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
