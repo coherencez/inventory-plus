@@ -1,12 +1,11 @@
 import r from 'rethinkdb';
 import bcrypt from 'bcrypt';
 import { handleError } from '../../utils';
-const SALT_ROUNDS = 12;
 
 export const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
     const newUser = await r
       .table('users')
       .insert({ name, email, password: hashedPassword })
