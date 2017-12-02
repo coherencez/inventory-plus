@@ -9,8 +9,7 @@ module.exports.createUser = async (req, res, next) => {
       .insert({ name, email, password })
       .run(req._rdb);
 
-    console.log(newUser);
-    res.status(200).send({ hello: 'everyone' });
+    res.status(200).send({ message: 'Successfully created new user!' });
   } catch (e) {
     handleError(res)(e);
   }
