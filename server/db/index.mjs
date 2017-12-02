@@ -1,7 +1,7 @@
-const r = require('rethinkdb');
-const { handleError } = require('../../utils');
+import r from 'rethinkdb';
+import { handleError } from '../../utils/index.mjs';
 
-module.exports.connect = async (req, res, next) => {
+export const connect = async (req, res, next) => {
   // middleware that adds db connection to the request object for easy access
   // TODO: find better way to handle this
   try {

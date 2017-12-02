@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "nodemon --inspect server/index.js",
+    "dev": "nodemon --inspect --experimental-modules server/index.mjs",
     "lint": "eslint ."
   },
   "dependencies": {

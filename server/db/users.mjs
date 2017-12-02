@@ -1,9 +1,9 @@
-const r = require('rethinkdb');
-const bcrypt = require('bcrypt');
-const { handleError } = require('../../utils');
+import r from 'rethinkdb';
+import bcrypt from 'bcrypt';
+import { handleError } from '../../utils/index.mjs';
 const SALT_ROUNDS = 12;
 
-module.exports.createUser = async (req, res, next) => {
+export const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -18,7 +18,7 @@ module.exports.createUser = async (req, res, next) => {
   }
 };
 
-module.exports.getUser = async (req, res, next) => {
+export const getUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const data = await r
@@ -31,19 +31,17 @@ module.exports.getUser = async (req, res, next) => {
     if (compare) {
       res.status(200).send({ message: 'Successfully logged in!' });
     } else {
-      res
-        .status(200)
-        .send({
-          message:
-            'Sorry, either your email or your password was incorrect. Please try again!'
-        });
+      res.status(200).send({
+        message:
+          'Sorry, either your email or your password was incorrect. Please try again!'
+      });
     }
   } catch (e) {
     handleError(res)(e);
   }
 };
 
-module.exports.getUsers = async (req, res, next) => {
+export const getUsers = async (req, res, next) => {
   try {
     const data = await r.table('users').run(req._rdb);
     const users = await data.toArray();

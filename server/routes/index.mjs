@@ -1,7 +1,7 @@
-const main = require('./main');
-const users = require('./users');
+import main from './main';
+import users from './users';
 
-module.exports.mountRoutes = app => {
+export const mountRoutes = app => {
   // add new use statement for each route
   app.use('/', main);
   app.use('/users', users);
