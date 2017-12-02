@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import { connect } from './db/index.mjs';
-import { mountRoutes } from './routes/index.mjs';
+import { connect } from './db';
+import { mountRoutes } from './routes';
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;

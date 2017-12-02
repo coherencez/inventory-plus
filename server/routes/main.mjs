@@ -1,5 +1,5 @@
-import router from './router.mjs';
-import { dataDelay, handleError } from '../../utils/index.mjs';
+import router from './router';
+import { dataDelay, handleError } from '../../utils';
 
 router.get('/', async (req, res) => {
   try {

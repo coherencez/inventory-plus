@@ -1,5 +1,5 @@
-import router from './router.mjs';
-import { createUser, getUser, getUsers } from '../db/users.mjs';
+import router from './router';
+import { createUser, getUser, getUsers } from '../db/users';
 
 router.get('/users', getUsers);
 router.post('/users/new', createUser);

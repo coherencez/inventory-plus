@@ -1,5 +1,5 @@
 import r from 'rethinkdb';
-import { handleError } from '../../utils/index.mjs';
+import { handleError } from '../../utils';
 
 export const connect = async (req, res, next) => {
   // middleware that adds db connection to the request object for easy access

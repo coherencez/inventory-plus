@@ -1,6 +1,6 @@
 import r from 'rethinkdb';
 import bcrypt from 'bcrypt';
-import { handleError } from '../../utils/index.mjs';
+import { handleError } from '../../utils';
 const SALT_ROUNDS = 12;
 
 export const createUser = async (req, res, next) => {
