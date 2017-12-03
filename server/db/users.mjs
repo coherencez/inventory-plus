@@ -5,7 +5,10 @@ import { handleError } from '../../utils';
 export const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
+    const hashedPassword = await bcrypt.hash(
+      password,
+      Number(process.env.SALT_ROUNDS)
+    );
     const newUser = await r
       .table('users')
       .insert({ name, email, password: hashedPassword })
@@ -27,14 +30,12 @@ export const getUser = async (req, res, next) => {
     const [user] = await data.toArray();
     const compare = await bcrypt.compare(password, user.password);
 
-    if (compare) {
-      res.status(200).send({ message: 'Successfully logged in!' });
-    } else {
-      res.status(200).send({
+    compare
+      ? res.status(200).send({ message: 'Successfully logged in!' })
+      : res.status(200).send({
         message:
-          'Sorry, either your email or your password was incorrect. Please try again!'
+            'Sorry, either your email or your password was incorrect. Please try again!'
       });
-    }
   } catch (e) {
     handleError(res)(e);
   }
