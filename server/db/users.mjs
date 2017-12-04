@@ -20,7 +20,7 @@ export const createUser = async (req, res, next) => {
   }
 };
 
-export const getUser = async (req, res, next) => {
+export const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const data = await r
@@ -44,7 +44,7 @@ export const getUser = async (req, res, next) => {
   }
 };
 
-export const getUsers = async (req, res, next) => {
+export const logins = async (req, res, next) => {
   try {
     const data = await r.table('users').run(req._rdb);
     const users = await data.toArray();
