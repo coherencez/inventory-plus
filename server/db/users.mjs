@@ -27,17 +27,20 @@ export const getUser = async (req, res, next) => {
       .table('users')
       .filter({ email })
       .run(req._rdb);
-    const [user] = await data.toArray();
-    const compare = await bcrypt.compare(password, user.password);
-
-    compare
+    const [dbUser] = await data.toArray();
+    (await bcrypt.compare(password, dbUser.password))
       ? res.status(200).send({ message: 'Successfully logged in!' })
       : res.status(200).send({
         message:
             'Sorry, either your email or your password was incorrect. Please try again!'
       });
   } catch (e) {
-    handleError(res)(e);
+    // custom error message to prevent leaking which identifier is wrong
+    const errorObj = Object.assign({}, e, {
+      message:
+        'Sorry, either your email or your password was incorrect. Please try again!'
+    });
+    handleError(res)(errorObj);
   }
 };
 
