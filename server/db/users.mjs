@@ -7,7 +7,7 @@ export const createUser = async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(
       password,
-      Number(process.env.SALT_ROUNDS)
+      parseInt(process.env.SALT_ROUNDS)
     );
     const newUser = await r
       .table('users')
@@ -44,7 +44,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logins = async (req, res, next) => {
+export const getUsers = async (req, res, next) => {
   try {
     const data = await r.table('users').run(req._rdb);
     const users = await data.toArray();
