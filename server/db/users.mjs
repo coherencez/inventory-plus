@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { handleError } from '../../utils';
 
 export const createUser = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { email, firstName, lastName, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(
       password,
@@ -11,7 +11,7 @@ export const createUser = async (req, res, next) => {
     );
     const newUser = await r
       .table('users')
-      .insert({ name, email, password: hashedPassword })
+      .insert({ email, firstName, lastName, password: hashedPassword })
       .run(req._rdb);
 
     res.status(200).send({ message: 'Successfully created new user!' });

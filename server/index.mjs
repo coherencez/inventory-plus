@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import { connect } from './db';
 import { mountRoutes } from './routes';
 dotenv.config();
+import { user } from './lib/dbSeed';
 
 const PORT = process.env.PORT || 8000;
 const app = express();
